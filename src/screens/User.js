@@ -10,6 +10,8 @@ const User = () => {
     setAlert({ showAlert: false, isSucceeded: false, message: '' });
   }
 
+  const showAlertMessage = (message, isSucceeded) => setAlert({ message, isSucceeded, showAlert: true });
+
   return (
     <Container>
       {
@@ -19,7 +21,7 @@ const User = () => {
           </Box>
         )
       }
-      <UserForm alertMessage={(message, isSucceeded) => setAlert({ message, isSucceeded, showAlert: true })} />
+      <UserForm alertMessage={showAlertMessage} />
     </Container >
   )
 };

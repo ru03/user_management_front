@@ -5,12 +5,17 @@ import UserForm from '../components/forms/users/User';
 
 const User = () => {
   const [alert, setAlert] = useState({ isSucceeded: false, message: '', showAlert: false });
+
+  const closeAlert = () => {
+    setAlert({ showAlert: false, isSucceeded: false, message: '' });
+  }
+
   return (
     <Container>
       {
         alert.showAlert && (
           <Box mt='20px'>
-            <Alert severity={alert.isSucceeded ? 'success' : 'error'}>{alert.message}</Alert>
+            <Alert onClick={closeAlert} severity={alert.isSucceeded ? 'success' : 'error'}>{alert.message}</Alert>
           </Box>
         )
       }

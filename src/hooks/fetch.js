@@ -27,8 +27,14 @@ const useFetch = () => {
   const sendRequest = useCallback((url, config) => {
     dispatch({ type: 'FETCH_REQUESTED' });
     fetch(url, config)
-      .then(res => res.json())
-      .then(data => dispatch({ type: 'FETCH_SUCCEEDED', payload: { data } }))
+      .then(res => Promise.all([res.ok, res.json()]))
+      .then(([isOk, data]) => {
+        if (isOk) {
+          dispatch({ type: 'FETCH_SUCCEEDED', payload: { data } })
+        } else {
+          dispatch({ type: 'FETCH_FAILED', payload: { error: 'An error ocurred. Try again.' } });
+        }
+      })
       .catch(err => dispatch({ type: 'FETCH_FAILED', payload: { error: err.message } }))
   }, []);
 

@@ -42,14 +42,16 @@ const User = ({ alertMessage }) => {
     onSubmit: (values, helpers) => {
       createUser(values);
       helpers.setSubmitting(false);
-      helpers.resetForm();
     },
     validate,
   });
 
   useEffect(() => {
     if (error) alertMessage(error, false);
-    if (data) alertMessage('Users was created', true);
+    if (data) {
+      alertMessage('Users was created', true);
+      formik.resetForm();
+    }
   }, [error, data]);
 
   const createUser = async (values) => {
@@ -104,6 +106,7 @@ const User = ({ alertMessage }) => {
             <TextField
               id="password"
               label="Password"
+              type="password"
               fullWidth
               onChange={formik.handleChange}
               value={formik.values.password}

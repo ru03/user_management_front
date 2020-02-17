@@ -1,4 +1,4 @@
 export default {
-  basepath: 'http://localhost:3001/api/v1/',
+  basepath: 'http://localhost:3001/api/v1',
   users: '/users'
 }

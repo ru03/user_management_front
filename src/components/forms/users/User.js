@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { Box, Button, Checkbox, FormControlLabel, Grid, TextField } from '@material-ui/core';
 
-const User = ({ errors, handleChange, handleSubmit, isSubmitting, isSucceeded, resetForm, touched, values }) => {
+const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, resetForm, touched, values }) => {
   useEffect(() => {
-    if (isSucceeded) resetForm();
-  }, [isSucceeded, resetForm]);
-
+    if (isResetForm) resetForm();
+  }, [isResetForm, resetForm]);
   return (
     <form onSubmit={handleSubmit}>
       <Box mt='20px'>
@@ -45,14 +44,13 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isSucceeded, r
           </Grid>
           <Grid xs={12} item>
             <TextField
-              id="password"
-              label="Password"
-              type="password"
+              id="position"
+              label="Position"
               fullWidth
               onChange={handleChange}
-              value={values.password}
-              error={touched.password && errors.password ? true : false}
-              helperText={touched.password && errors.password}
+              value={values.position}
+              error={touched.position && errors.position ? true : false}
+              helperText={touched.position && errors.position}
             />
           </Grid>
           <Grid xs={12} item>

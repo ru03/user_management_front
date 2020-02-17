@@ -16,6 +16,8 @@ const reducer = (state, action) => {
     case 'FETCH_SUCCEEDED':
       const { data } = action.payload;
       return { ...state, isLoading: false, data }
+    case 'CLEAR':
+      return initState;
     default:
       return state;
   }
@@ -24,6 +26,7 @@ const reducer = (state, action) => {
 const useFetch = () => {
   const [fetchState, dispatch] = useReducer(reducer, initState);
 
+  const clear = useCallback(() => dispatch({ type: 'CLEAR' }), [dispatch]);
   const sendRequest = useCallback((url, config) => {
     dispatch({ type: 'FETCH_REQUESTED' });
     fetch(url, config)
@@ -42,6 +45,7 @@ const useFetch = () => {
     error: fetchState.error,
     isLoading: fetchState.isLoading,
     data: fetchState.data,
+    clear,
     sendRequest,
   }
 }

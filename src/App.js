@@ -11,6 +11,7 @@ function App() {
       <AppBarUI position="static" />
       <Switch>
         <Route path='/' component={Main} exact />
+        <Route path='/user/:id' component={User} />
         <Route path='/user' component={User} />
       </Switch>
     </BrowserRouter>

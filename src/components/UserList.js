@@ -16,8 +16,9 @@ import { Check, Clear, Delete } from '@material-ui/icons';
 import { Spinner } from './UI';
 import moment from 'moment';
 import env from '../config/config';
+import { withRouter } from 'react-router-dom';
 
-const UserList = () => {
+const UserList = ({ history }) => {
   const COLUMS = ['Name', 'Last Name', 'Email', 'Active', 'Updated At', 'Delete'];
   const [pagination, setPagination] = useState({ page: 0, order: 'DESC', limit: 10 });
   const { data, isLoading, sendRequest } = useFetch();
@@ -66,14 +67,14 @@ const UserList = () => {
                     {
                       data && data.users.map(res => (
                         <TableRow key={res.id}>
-                          <TableCell>{res.name}</TableCell>
-                          <TableCell>{res.lastName}</TableCell>
-                          <TableCell>{res.email}</TableCell>
-                          <TableCell>
+                          <TableCell onClick={() => history.push(`/user/${res.id}`)}>{res.name}</TableCell>
+                          <TableCell onClick={() => history.push(`/user/${res.id}`)}>{res.lastName}</TableCell>
+                          <TableCell onClick={() => history.push(`/user/${res.id}`)}>{res.email}</TableCell>
+                          <TableCell onClick={() => history.push(`/user/${res.id}`)}>
                             {res.active ? <Check /> : <Clear />}
                           </TableCell>
-                          <TableCell>{moment(res.updatedAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
-                          <TableCell><Delete onClick={() => deleteUser(res.id)} /></TableCell>
+                          <TableCell onClick={() => history.push(`/user/${res.id}`)}>{moment(res.updatedAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
+                          <TableCell onClick={() => deleteUser(res.id)}><Delete /></TableCell>
                         </TableRow>
                       ))
                     }
@@ -95,4 +96,4 @@ const UserList = () => {
   )
 }
 
-export default UserList;
+export default withRouter(UserList);

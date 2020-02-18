@@ -68,7 +68,16 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, r
           </Grid>
           <Grid xs={12} item>
             <Box mt='20px'>
-              <Button id="create" variant="contained" color="primary" type="submit" disabled={isSubmitting} fullWidth>Create</Button>
+              <Button
+                id="create"
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={isSubmitting}
+                fullWidth
+              >
+                Create
+              </Button>
             </Box>
           </Grid>
         </Grid>

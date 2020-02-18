@@ -9,7 +9,7 @@ const initState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUESTED':
-      return { ...state, isLoading: true }
+      return { ...initState, isLoading: true }
     case 'FETCH_FAILED':
       const { error } = action.payload;
       return { data: null, isLoading: false, error }
@@ -35,7 +35,7 @@ const useFetch = () => {
         if (isOk) {
           dispatch({ type: 'FETCH_SUCCEEDED', payload: { data } })
         } else {
-          dispatch({ type: 'FETCH_FAILED', payload: { error: 'An error ocurred. Try again.' } });
+          dispatch({ type: 'FETCH_FAILED', payload: { error: data.message } });
         }
       })
       .catch(err => dispatch({ type: 'FETCH_FAILED', payload: { error: err.message } }))

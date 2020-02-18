@@ -1,35 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Formik } from 'formik';
-import { Box, Container } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { Container } from '@material-ui/core';
+import { Alert } from '../components/UI';
+import { userValidation } from '../utils/validations'
 import UserForm from '../components/forms/users/User';
 import useFetch from '../hooks/fetch';
 import env from '../config/config';
-
-const validate = values => {
-  const errors = {};
-  if (!values.name) {
-    errors.name = 'Name is required!';
-  } else if (values.name.length < 3) {
-    errors.name = 'Must be 3 characters or more';
-  }
-  if (!values.lastName) {
-    errors.lastName = 'Last names is required!';
-  } else if (values.lastName.length < 3) {
-    errors.lastName = 'Must be 3 characters or more';
-  }
-  if (!values.email) {
-    errors.email = 'Email is required!'
-  } else if (!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(values.email)) {
-    errors.email = 'You must introduced a valid email';
-  }
-  if (!values.position) {
-    errors.position = 'Position is required!'
-  }
-
-  return errors;
-}
 
 const User = () => {
   const { data: userCreated, error: userCreatedError, sendRequest: createUser } = useFetch();
@@ -42,13 +19,13 @@ const User = () => {
     position: '',
     isActive: false,
   });
-  const [alert, setAlert] = useState({ isSucceeded: false, message: '', showAlert: false, isResetForm: false });
+  const [alert, setAlert] = useState({ isSucceeded: false, message: '', isResetForm: false });
   const { id } = useParams();
 
   useEffect(() => {
-    if (userCreatedError || userError) setAlert({ message: userCreatedError || userError, isSucceeded: false, showAlert: true, isResetForm: false });
+    if (userCreatedError || userError) setAlert({ message: userCreatedError || userError, isSucceeded: false, isResetForm: false });
     if (userCreated) {
-      setAlert({ message: 'Users was created', isSucceeded: true, showAlert: true, isResetForm: true });
+      setAlert({ message: 'Users was created', isSucceeded: true, isResetForm: true });
     }
     if (user) {
       const { users: { name, lastName, email, active, position } } = user;
@@ -56,19 +33,19 @@ const User = () => {
     };
 
     return () => {
-      setAlert({ isSucceeded: false, message: '', showAlert: false, isResetForm: false })
+      setAlert({ isSucceeded: false, message: '', isResetForm: false })
     }
   }, [userCreatedError, userCreated, user, userError]);
 
   //Update effect
   useEffect(() => {
-    if (userUpdatedError) setAlert({ message: userUpdatedError, isSucceeded: false, showAlert: true, isResetForm: false });
+    if (userUpdatedError) setAlert({ message: userUpdatedError, isSucceeded: false, isResetForm: false });
     if (userUpdated) {
-      setAlert({ message: 'Users was updated', isSucceeded: true, showAlert: true, isResetForm: false });
+      setAlert({ message: 'Users was updated', isSucceeded: true, isResetForm: false });
     }
 
     return () => {
-      setAlert({ isSucceeded: false, message: '', showAlert: false, isResetForm: false })
+      setAlert({ isSucceeded: false, message: '', isResetForm: false })
     }
   }, [clearUpdated, userUpdatedError, userUpdated])
 
@@ -90,8 +67,6 @@ const User = () => {
     }
   }, [id, sendUserReq, clear]);
 
-  const closeAlert = () => setAlert({ showAlert: false, isSucceeded: false, message: '' });
-
   const onSubmit = (values, helpers) => {
     id ? onUpdateUser(values) : onCreateUser(values);
     helpers.setSubmitting(false);
@@ -105,7 +80,7 @@ const User = () => {
       },
       body: JSON.stringify(values),
     }
-    await createUser(`${env.basepath}${env.users}`, config);
+    createUser(`${env.basepath}${env.users}`, config);
   }
 
   const onUpdateUser = async (values) => {
@@ -116,23 +91,17 @@ const User = () => {
       },
       body: JSON.stringify(values),
     }
-    await updateUser(`${env.basepath}${env.users}/${id}`, config);
+    updateUser(`${env.basepath}${env.users}/${id}`, config);
   }
 
   return (
     <Container>
-      {
-        alert.showAlert && (
-          <Box mt='20px'>
-            <Alert onClick={closeAlert} severity={alert.isSucceeded ? 'success' : 'error'}>{alert.message}</Alert>
-          </Box>
-        )
-      }
+      <Alert message={alert.message} isSucceeded={alert.isSucceeded} />
       <Formik
         initialValues={initValues}
         enableReinitialize
         onSubmit={onSubmit}
-        validate={validate}
+        validate={userValidation}
       >
         {props => <UserForm {...props} isResetForm={alert.isResetForm} />}
       </Formik>

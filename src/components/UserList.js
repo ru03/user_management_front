@@ -17,6 +17,7 @@ import { Spinner } from './UI';
 import moment from 'moment';
 import env from '../config/config';
 import { withRouter } from 'react-router-dom';
+import { addBearerToken } from '../utils/auth';
 
 const UserList = ({ history }) => {
   const COLUMS = ['Name', 'Last Name', 'Email', 'Active', 'Updated At', 'Delete'];
@@ -29,6 +30,7 @@ const UserList = ({ history }) => {
     const config = {
       method: 'GET',
       headers: {
+        'Authorization': addBearerToken(),
         'Content-Type': 'application/json'
       }
     }
@@ -43,6 +45,7 @@ const UserList = ({ history }) => {
     const config = {
       method: 'DELETE',
       headers: {
+        'Authorization': addBearerToken(),
         'Content-Type': 'application/json'
       }
     }

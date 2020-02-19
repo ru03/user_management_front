@@ -13,8 +13,8 @@ function App() {
       <AppBarUI position="static" />
       <Switch>
         <Route path='/login' component={Auth} />
-        <Route path='/user/:id' component={User} />
-        <Route path='/user' component={User} />
+        <PrivateRoute path="/user" component={User} exact={true} />
+        <PrivateRoute path="/user/:id" component={User} exact={true} />
         <PrivateRoute path="/" component={Main} />
       </Switch>
     </BrowserRouter>

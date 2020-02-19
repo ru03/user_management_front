@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import { Formik } from 'formik';
 import { Container } from '@material-ui/core';
 import { Alert } from '../components/UI';
+import { addBearerToken } from '../utils/auth';
 import { userValidation } from '../utils/validations'
 import UserForm from '../components/forms/users/User';
 import useFetch from '../hooks/fetch';
 import env from '../config/config';
+
 
 const User = () => {
   const { data: userCreated, error: userCreatedError, sendRequest: createUser } = useFetch();
@@ -55,6 +57,7 @@ const User = () => {
       const config = {
         method: 'GET',
         headers: {
+          'Authorization': addBearerToken(),
           'Content-Type': 'application/json'
         },
       }
@@ -76,6 +79,7 @@ const User = () => {
     const config = {
       method: 'POST',
       headers: {
+        'Authorization': addBearerToken(),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(values),
@@ -87,6 +91,7 @@ const User = () => {
     const config = {
       method: 'PUT',
       headers: {
+        'Authorization': addBearerToken(),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(values),

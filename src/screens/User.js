@@ -108,7 +108,7 @@ const User = () => {
         onSubmit={onSubmit}
         validate={userValidation}
       >
-        {props => <UserForm {...props} isResetForm={alert.isResetForm} />}
+        {props => <UserForm {...props} isResetForm={alert.isResetForm} isUpdate={id ? true : false} />}
       </Formik>
     </Container >
   )

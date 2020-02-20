@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Box, Button, Checkbox, FormControlLabel, Grid, TextField } from '@material-ui/core';
 
-const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, resetForm, touched, values }) => {
+const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, isUpdate, resetForm, touched, values }) => {
   useEffect(() => {
     if (isResetForm) resetForm();
   }, [isResetForm, resetForm]);
@@ -76,7 +76,7 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, r
                 disabled={isSubmitting}
                 fullWidth
               >
-                Create
+                {isUpdate ? 'Update' : 'Create'}
               </Button>
             </Box>
           </Grid>

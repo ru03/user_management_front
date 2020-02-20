@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import AuthProvider from './providers/authProvider';
 import Auth from './screens/Auth';
 import Main from './screens/Main';
 import User from './screens/User';
@@ -10,12 +11,14 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <AppBarUI position="static" />
       <Switch>
-        <Route path='/login' component={Auth} />
-        <PrivateRoute path="/user" component={User} exact={true} />
-        <PrivateRoute path="/user/:id" component={User} exact={true} />
-        <PrivateRoute path="/" component={Main} />
+        <AuthProvider>
+          <AppBarUI position="static" />
+          <Route path='/login' component={Auth} />
+          <PrivateRoute path="/users" component={Main} />
+          <PrivateRoute path="/user/:id?" component={User} />
+          {/* <PrivateRoute path="/user" component={User} /> */}
+        </AuthProvider>
       </Switch>
     </BrowserRouter>
   );

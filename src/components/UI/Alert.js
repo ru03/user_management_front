@@ -14,7 +14,13 @@ const AlertUI = ({ message, isSucceeded = false }) => {
   return (
     showAlert && (
       <Box mt='20px'>
-        <Alert onClick={closeAlert} severity={isSucceeded ? 'success' : 'error'}>{message}</Alert>
+        <Alert
+          data-testid="alert"
+          onClick={closeAlert}
+          severity={isSucceeded ? 'success' : 'error'}
+        >
+          {message}
+        </Alert>
       </Box>
     )
   );

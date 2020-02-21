@@ -29,13 +29,15 @@ const AppBarUI = ({ color = 'default', position = 'fixed' }) => {
         {
           isAuth
             ? (
-              <Button color="inherit">
-                <Link to='/user' className={styles.links}>Create User</Link>
-              </Button>
-              <div className={styles.signOut}>
-                <Button color="inherit" onClick={onSignOut}>Sign out</Button>
-              </div>
-              )
+              <>
+                <Button color="inherit">
+                  <Link to='/user' className={styles.links}>Create User</Link>
+                </Button>
+                <div className={styles.signOut}>
+                  <Button color="inherit" onClick={onSignOut}>Sign out</Button>
+                </div>
+              </>
+            )
             : (
               <div className={styles.signOut}>
                 <Button color="inherit">

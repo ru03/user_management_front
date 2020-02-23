@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../setupTest';
 import { render } from '@testing-library/react';
 import UserList from '../../components/UserList';
 import { MemoryRouter } from 'react-router-dom';
@@ -13,7 +12,7 @@ describe('UserList Component', () => {
 
   it('renders Spinner when isLoading true', () => {
     jest.spyOn(useFetch, 'default').mockReturnValue({ error: null, isLoading: true, data: null, sendRequest: jest.fn() });
-    const { getByRole } = render(<MemoryRouter><UserList /></MemoryRouter>);
+    const { getByRole } = render(<UserList />, { wrapper: MemoryRouter });
     expect(getByRole('progressbar')).toBeTruthy();
   });
 
@@ -28,7 +27,7 @@ describe('UserList Component', () => {
         },
         sendRequest: () => true
       });
-    const { getByText, getByTestId } = render(<MemoryRouter><UserList /></MemoryRouter>);
+    const { getByText, getByTestId } = render(<UserList />, { wrapper: MemoryRouter });
     expect(getByText('name')).toBeTruthy();
     expect(getByText('last')).toBeTruthy();
     expect(getByText('a@a.com')).toBeTruthy();
@@ -46,7 +45,7 @@ describe('UserList Component', () => {
         },
         sendRequest: () => true
       });
-    const { getByTestId } = render(<MemoryRouter><UserList /></MemoryRouter>);
+    const { getByTestId } = render(<UserList />, { wrapper: MemoryRouter });
     expect(getByTestId('inactive')).toBeTruthy();
   });
 });

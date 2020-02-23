@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../setupTest';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom'
 import AppBarUI from '../../../components/UI/AppBarUI';

@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../setupTest';
 import { render, fireEvent } from '@testing-library/react';
 import FloatButton from '../../../components/UI/FloatButton';
 

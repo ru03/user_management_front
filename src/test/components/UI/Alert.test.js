@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../setupTest';
 import { fireEvent, render } from '@testing-library/react';
 import Alert from '../../../components/UI/Alert';
 
@@ -13,7 +12,7 @@ describe('Alert Component', () => {
     const { container, getByTestId } = render(<Alert message='error message' />);
     const alert = getByTestId('alert');
     fireEvent.click(alert);
-    expect(container.firstChild).toBeNull();
+    expect(container.firstChild).not.toBeInTheDocument();
   });
 
   it('is disabled if not message passed', () => {

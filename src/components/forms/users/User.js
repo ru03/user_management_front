@@ -6,7 +6,7 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, i
     if (isResetForm) resetForm();
   }, [isResetForm, resetForm]);
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} data-testid="userForm">
       <Box mt='20px'>
         <Grid container alignContent="center">
           <Grid xs={12} item>
@@ -14,6 +14,7 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, i
               id="name"
               label="Name"
               fullWidth
+              placeholder="Name"
               onChange={handleChange}
               value={values.name}
               error={touched.name && errors.name ? true : false}
@@ -25,6 +26,7 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, i
               id="lastName"
               label="Last Name"
               fullWidth
+              placeholder="Last Name"
               onChange={handleChange}
               value={values.lastName}
               error={touched.lastName && errors.lastName ? true : false}
@@ -35,6 +37,7 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, i
             <TextField
               id="email"
               label="Email"
+              placeholder="Email"
               fullWidth
               onChange={handleChange}
               value={values.email}
@@ -46,6 +49,7 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, i
             <TextField
               id="position"
               label="Position"
+              placeholder="Position"
               fullWidth
               onChange={handleChange}
               value={values.position}
@@ -58,6 +62,7 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, i
               control={
                 <Checkbox
                   id="isActive"
+                  data-testid="activeUser"
                   onChange={handleChange}
                   checked={values.isActive}
                   value={values.isActive}
@@ -70,6 +75,7 @@ const User = ({ errors, handleChange, handleSubmit, isSubmitting, isResetForm, i
             <Box mt='20px'>
               <Button
                 id="create"
+                data-testid="buttonCreate"
                 variant="contained"
                 color="primary"
                 type="submit"

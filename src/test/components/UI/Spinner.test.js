@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../setupTest';
 import { render } from '@testing-library/react';
 import Spinner from '../../../components/UI/Spinner';
 

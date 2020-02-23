@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 const Login = ({ errors, handleChange, handleSubmit, isSubmitting, touched, values }) => {
   const classes = useStyles();
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} data-testid="loginForm">
       <Box mt="25%">
         <Grid
           container
@@ -29,6 +29,7 @@ const Login = ({ errors, handleChange, handleSubmit, isSubmitting, touched, valu
                   id="email"
                   name="email"
                   label="Email"
+                  placeholder="email"
                   fullWidth
                   onChange={handleChange}
                   value={values.email}
@@ -42,6 +43,7 @@ const Login = ({ errors, handleChange, handleSubmit, isSubmitting, touched, valu
                   name="password"
                   label="Password"
                   type="password"
+                  placeholder="password"
                   fullWidth
                   onChange={handleChange}
                   value={values.password}
@@ -54,6 +56,7 @@ const Login = ({ errors, handleChange, handleSubmit, isSubmitting, touched, valu
               <Grid lg={12} item>
                 <Button
                   id="login_button"
+                  data-testid="buttonSubmit"
                   color="primary"
                   disabled={isSubmitting}
                   variant="contained"

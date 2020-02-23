@@ -74,7 +74,7 @@ const UserList = ({ history }) => {
                           <TableCell onClick={() => history.push(`/user/${res.id}`)}>{res.lastName}</TableCell>
                           <TableCell onClick={() => history.push(`/user/${res.id}`)}>{res.email}</TableCell>
                           <TableCell onClick={() => history.push(`/user/${res.id}`)}>
-                            {res.active ? <Check /> : <Clear />}
+                            {res.active ? <Check data-testid="active" /> : <Clear data-testid="inactive" />}
                           </TableCell>
                           <TableCell onClick={() => history.push(`/user/${res.id}`)}>{moment(res.updatedAt).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
                           <TableCell onClick={() => deleteUser(res.id)}><Delete /></TableCell>

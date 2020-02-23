@@ -12,7 +12,7 @@ describe('Alert Component', () => {
   it('hides alert componet if click on close', () => {
     const { container, getByTestId } = render(<Alert message='error message' />);
     const alert = getByTestId('alert');
-    fireEvent.click(alert)
+    fireEvent.click(alert);
     expect(container.firstChild).toBeNull();
   });
 

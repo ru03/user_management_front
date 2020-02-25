@@ -12,7 +12,6 @@ import Login from '../components/forms/auth/Login';
 const Auth = () => {
   const { data, error, sendRequest } = useFetch();
   const { onLogin } = useAuthDataContext();
-
   useEffect(() => {
     if (data) {
       localStorage.setItem('token', data.token);
@@ -28,7 +27,7 @@ const Auth = () => {
       },
       body: JSON.stringify(values),
     }
-    sendRequest(`${env.basepath}${env.auth}`, config);
+    sendRequest(`${env.REACT_APP_BASEPATH}${env.REACT_APP_AUTH}`, config);
     helpers.setSubmitting(false);
   }
   return (

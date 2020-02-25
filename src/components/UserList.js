@@ -34,7 +34,7 @@ const UserList = ({ history }) => {
         'Content-Type': 'application/json'
       }
     }
-    sendRequest(`${env.basepath}${env.users}?page=${page}&limit=${limit}&order=${order}`, config);
+    sendRequest(`${env.REACT_APP_BASEPATH}${env.REACT_APP_USERS}?page=${page}&limit=${limit}&order=${order}`, config);
   }, [isDeleteLoading, pagination, sendRequest]);
 
   const handleChangePage = (_, newPage) => {
@@ -49,7 +49,7 @@ const UserList = ({ history }) => {
         'Content-Type': 'application/json'
       }
     }
-    sendDeleteRequest(`${env.basepath}${env.users}/${id}`, config);
+    sendDeleteRequest(`${env.REACT_APP_BASEPATH}${env.REACT_APP_USERS}/${id}`, config);
   }
 
   return (

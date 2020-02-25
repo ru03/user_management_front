@@ -61,7 +61,7 @@ const User = () => {
           'Content-Type': 'application/json'
         },
       }
-      sendUserReq(`${env.basepath}${env.users}/${id}`, config);
+      sendUserReq(`${env.REACT_APP_BASEPATH}${env.REACT_APP_USERS}/${id}`, config);
     };
     if (id === undefined) setInitValues({ name: '', lastName: '', email: '', isActive: false, position: '' });
 
@@ -84,7 +84,7 @@ const User = () => {
       },
       body: JSON.stringify(values),
     }
-    createUser(`${env.basepath}${env.users}`, config);
+    createUser(`${env.REACT_APP_BASEPATH}${env.REACT_APP_USERS}`, config);
   }
 
   const onUpdateUser = async (values) => {
@@ -96,7 +96,7 @@ const User = () => {
       },
       body: JSON.stringify(values),
     }
-    updateUser(`${env.basepath}${env.users}/${id}`, config);
+    updateUser(`${env.REACT_APP_BASEPATH}${env.REACT_APP_USERS}/${id}`, config);
   }
 
   return (

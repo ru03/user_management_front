@@ -17,6 +17,7 @@ function App() {
           <Route path='/login' component={Auth} />
           <PrivateRoute path="/users" component={Main} />
           <PrivateRoute path="/user/:id?" component={User} />
+          <Route path='/' component={Auth} />
           {/* <PrivateRoute path="/user" component={User} /> */}
         </AuthProvider>
       </Switch>

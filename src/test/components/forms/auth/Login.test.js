@@ -14,8 +14,14 @@ describe('Login Form Component', () => {
       values: {},
     }
   });
+
+  it('mounts', () => {
+    const { asFragment } = render(<Login {...props} />);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('calls email handle change', () => {
-    const { getByPlaceholderText } = render(<Login {...props} />)
+    const { getByPlaceholderText } = render(<Login {...props} />);
     fireEvent.change(getByPlaceholderText('email'), { target: { value: 'value' } });
     expect(props.handleChange).toHaveBeenCalledTimes(1);
     expect(getByPlaceholderText('email').value).toBe('value');

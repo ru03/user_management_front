@@ -3,6 +3,11 @@ import { render, fireEvent } from '@testing-library/react';
 import FloatButton from '../../../components/UI/FloatButton';
 
 describe('FloatButton Component', () => {
+  it('mounts', () => {
+    const { asFragment } = render(<FloatButton children='Submit' />);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('has a title', () => {
     const { getByText } = render(<FloatButton children='Submit' />);
     expect(getByText('Submit')).toHaveTextContent('Submit');

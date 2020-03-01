@@ -3,6 +3,12 @@ import { fireEvent, render } from '@testing-library/react';
 import Alert from '../../../components/UI/Alert';
 
 describe('Alert Component', () => {
+
+  it('mounts', () => {
+    const { asFragment } = render(<Alert message='error message' />);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('shows a message error if it is passed by props', () => {
     const { getByText } = render(<Alert message='error message' />);
     expect(getByText('error message')).toHaveTextContent('error message');

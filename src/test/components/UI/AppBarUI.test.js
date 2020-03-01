@@ -6,6 +6,12 @@ import AuthProvider from '../../../providers/authProvider';
 import * as isAuthorize from '../../../utils/auth/isAuth';
 
 describe('FloatButton Component', () => {
+
+  it('mounts', () => {
+    const { asFragment } = render(<AuthProvider><AppBarUI /></AuthProvider>, { wrapper: MemoryRouter });
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   describe('Is not authorize', () => {
     it('has not authorize buttons', () => {
       const { getByText } = render(<AuthProvider><AppBarUI /></AuthProvider>, { wrapper: MemoryRouter });

@@ -17,6 +17,12 @@ describe('Login Form Component', () => {
       values: {},
     }
   });
+
+  it('mounts', () => {
+    const { asFragment } = render(<User {...props} />);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('calls handle change on each field', () => {
     const { container, getByPlaceholderText } = render(<User {...props} />)
     fireEvent.change(getByPlaceholderText('Name'), { target: { value: 'value' } });
@@ -33,13 +39,15 @@ describe('Login Form Component', () => {
   });
 
   it('shows error name, last name, email and position', () => {
-    props = { ...props, errors: { 
-      name: 'Name is required!',
-      lastName: 'Last name is required!',
-      email: 'Email is required!',
-      position: 'Position is required!',
-    }, 
-    touched: { name: true, lastName: true, email: true, position: true, } }
+    props = {
+      ...props, errors: {
+        name: 'Name is required!',
+        lastName: 'Last name is required!',
+        email: 'Email is required!',
+        position: 'Position is required!',
+      },
+      touched: { name: true, lastName: true, email: true, position: true, }
+    }
     const { getByText } = render(<User {...props} />)
     expect(getByText('Name is required!')).toBeInTheDocument();
     expect(getByText('Last name is required!')).toBeInTheDocument();
